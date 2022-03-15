@@ -14,11 +14,11 @@ import pymongo
 class Extraccion_Precios:
     
     def __init__(self):
-        self.MONGODB_HOST
+        self.MONGODB_HOST = "192.168.142.128"
         self.MONGODB_PORT = '27017'
         self.MONGODB_TIMEOUT = 1000
-        self.driver = webdriver.Chrome('C:/geckodriver.exe')    
-        self.URI_CONNECTION = "mongodb://" + MONGODB_HOST + ":" + MONGODB_PORT +  "/"
+        self.driver = webdriver.Chrome('C://chromedriver.exe')    
+        self.URI_CONNECTION = "mongodb://" + self.MONGODB_HOST + ":" + self.MONGODB_PORT +  "/"
 
 
     def connect(self):
