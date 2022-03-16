@@ -14,13 +14,17 @@ import pymongo
 class Extraccion_Precios:
     
     def __init__(self):
-        self.MONGODB_HOST = "192.168.142.128"
+        self.MONGODB_HOST = "localhost"     #192.168.142.128
         self.MONGODB_PORT = '27017'
         self.MONGODB_TIMEOUT = 1000
-        self.driver = webdriver.Chrome('C://chromedriver.exe')    
+        self.path = 'C:/chromedriver.exe'    
         self.URI_CONNECTION = "mongodb://" + self.MONGODB_HOST + ":" + self.MONGODB_PORT +  "/"
 
-
+    def scraping(self):
+        self.driver = webdriver.Chrome(self.path)
+        self.driver.get ('https://es.wallapop.com/')
+       
+        
     def connect(self):
         
        try:
@@ -35,7 +39,8 @@ class Extraccion_Precios:
 
 
     def inicio(self):  
-       self.connect()  
+       #self.connect()
+       self.scraping()
     
 if __name__ == "__main__":
     Extraccion_Precios().inicio()  
