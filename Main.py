@@ -23,7 +23,11 @@ class Extraccion_Precios:
     def scraping(self):
         self.driver = webdriver.Chrome(self.path)
         self.driver.get ('https://es.wallapop.com/')
-       
+        button = self.driver.find_element_by_id('didomi-notice-agree-button')
+        self.driver.implicitly_wait(10)
+        ActionChains(self.driver).move_to_element(button).click(button).perform()
+        self.driver.find_element_by_link_text("Motor y Accesorios").click()
+        self.driver.implicitly_wait(10)
         
     def connect(self):
         
