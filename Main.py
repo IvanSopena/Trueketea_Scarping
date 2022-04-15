@@ -28,6 +28,23 @@ class Extraccion_Precios:
         ActionChains(self.driver).move_to_element(button).click(button).perform()
         self.driver.find_element_by_link_text("Motor y Accesorios").click()
         self.driver.implicitly_wait(10)
+        button = self.driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[4]/div[1]/div/form/input')
+        ActionChains(self.driver).move_to_element(button).click(button).perform()
+        button = self.driver.find_element_by_xpath('//*[@id="btn-load-more"]/button')
+        ActionChains(self.driver).move_to_element(button).click(button).perform()
+        self.driver.implicitly_wait(10)
+        button = self.driver.find_element_by_xpath('//*[@id="access-modal"]/div/div[2]/svg')
+        ActionChains(self.driver).move_to_element(button).click(button).perform()
+        
+        last_height = self.driver.execute_script('return document.body.scrollHeight')
+        while True:
+           self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
+           time.sleep(2)
+           new_height = self.driver.execute_script('return document.body.scrollHeight')
+           
+           if new_height == last_height:
+               break
+           last_height = new_height
         
     def connect(self):
         
