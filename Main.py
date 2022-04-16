@@ -24,11 +24,8 @@ class Extraccion_Precios:
         self.path = '/Users/ivan/Downloads/chromedriver'    
         self.URI_CONNECTION = "mongodb://" + self.MONGODB_HOST + ":" + self.MONGODB_PORT +  "/"
         self.data = {}
-
+        self.COLLECTION
        
-
-
-
 
     def scraping(self):
         #Agregamnos la direccion IP
@@ -71,52 +68,36 @@ class Extraccion_Precios:
                             'Categoria': '4',
                             'Precio': price,
                             'Producto': name_product})
-                   #self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
+                  
                    
-                   
-               
-               
-               
                with open(file_name, 'w') as file:
                    json.dump(self.data, file)
+              x = mycol.insert_one(mydict)
                
-               
-                  
-            
-            
-                  
-                   
-             # with open('data.json', 'w') as file:
-             #      json.dump(self.data, file, indent=4)      
-             
-               
-               
-                 
-                   
-            
-           # if i == 2:
-           #     #bebés
-           #     seccion = self.driver.find_element_by_xpath('//*[@id="s-refinements"]/div/ul/li[20]/span/a')
-           #     ActionChains(self.driver).move_to_element(seccion).click(seccion).perform()
+
+            if i == 2:
+                #bebés
+                seccion = self.driver.find_element_by_xpath('//*[@id="s-refinements"]/div/ul/li[20]/span/a')
+                ActionChains(self.driver).move_to_element(seccion).click(seccion).perform()
+
+                dir = "/Users/ivan/Downloads/"  # También es válido 'C:\\Pruebas' o r'C:\Pruebas'
+                file_name = "data.json"
            
-           #     for objeto in range(1,20):      
-           #         name_product = self.driver.find_element_by_xpath ('//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div['+str(objeto+1)+']/div/div/div/div/div[3]/div[1]/h2/a/span')
+                for objeto in range(1,20):      
+                    name_product = self.driver.find_element_by_xpath ('//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div['+str(objeto)+']/div/div/div/div/div[3]/div[1]/h2/a/span').text
+                       price = self.driver.find_element_by_xpath ('//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div['+str(objeto)+']/div/div/div/div/div[3]/div[3]/div/span[2]').text
+                       
+                       self.data['Products_Price'].append({
+                            'Categoria': '4',
+                            'Precio': price,
+                            'Producto': name_product})
            
-            # if i == 3:
-            #    #Motor
-            #    seccion = self.driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[2]/div[2]/div/div/div/ul/li[14]/span/a')
-            #    ActionChains(self.driver).move_to_element(seccion).click(seccion).perform()
-               
-            #    for objeto in range(1,20):      
-            #        name_product = self.driver.find_element_by_xpath ('//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div['+str(objeto)+']/div/div/div/div/div[3]/div[1]/h2/a')
+            
+            with open(file_name, 'w') as file:
+                   json.dump(self.data, file)
+              x = mycol.insert_one(mydict)
         
-       
-        
-        
-        
-       
-        
-        
+
     def connect(self):
         
        try:
