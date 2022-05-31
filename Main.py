@@ -115,8 +115,8 @@ class Extraccion_Precios:
 
 
     def inicio(self):  
-       #self.connect()
-       self.data['Products_Price'] = []
+       self.connect()
+       #self.data['Products_Price'] = []
        self.scraping()
     
 if __name__ == "__main__":
