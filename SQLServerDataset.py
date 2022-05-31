@@ -51,7 +51,15 @@ class Extraccion_Precios:
             with switch(seccion) as s:
                 
                 if s.case(1, True):
-                    print('lunes')
+
+                    #informática
+                    seccion = self.driver.find_element_by_xpath('//*[@id="s-refinements"]/div/ul/li[9]/span/a')
+                    ActionChains(self.driver).move_to_element(seccion).click(seccion).perform()
+                    
+
+
+
+
                 if s.case(2, True):
                     print('martes')
                 if s.case(3, True):
