@@ -1,5 +1,5 @@
 # Script en python para la extraccion de los precios de los productos con el objetivo de
-# crear un dataset.
+# crear un dataset en MONGODB.
 
 import json
 import os
@@ -88,7 +88,7 @@ class Extraccion_Precios:
                        price = self.driver.find_element_by_xpath ('//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div['+str(objeto)+']/div/div/div/div/div[3]/div[3]/div/span[2]').text
                        
                        self.data['Products_Price'].append({
-                            'Categoria': '4',
+                            'Categoria': '9',
                             'Precio': price,
                             'Producto': name_product})
            

@@ -1,5 +1,5 @@
 # Script en python para la extraccion de los precios de los productos con el objetivo de
-# crear un dataset.
+# crear un dataset en la base de datos SQL SERVER.
 
 import json
 import os
@@ -17,7 +17,6 @@ import pyodbc
 class Extraccion_Precios:
 
         self.path = '/Users/ivan/Downloads/chromedriver'    
-        self.data = {}
         self.server = '192.168.1.51' 
         self.database = 'Trueketea' 
         self.username = 'tkadmin' 
@@ -46,7 +45,7 @@ class Extraccion_Precios:
 
         #Realizamos un bucle que recorre las distintas secciones para extraer datos
         #Solamente se hace la estraccion de 3 secciones aunrque se pueden añadir mas
-        for seccion in range(1,3):
+        for seccion in range(1,2):
 
             with switch(seccion) as s:
                 
@@ -56,15 +55,33 @@ class Extraccion_Precios:
                     seccion = self.driver.find_element_by_xpath('//*[@id="s-refinements"]/div/ul/li[9]/span/a')
                     ActionChains(self.driver).move_to_element(seccion).click(seccion).perform()
                     
-
-
-
+                    self.extrac_info(4)
 
                 if s.case(2, True):
-                    print('martes')
-                if s.case(3, True):
-                    print('miércoles')
+
+                    #Bebés
+                    seccion = self.driver.find_element_by_xpath('//*[@id="s-refinements"]/div/ul/li[20]/span/a')
+                    ActionChains(self.driver).move_to_element(seccion).click(seccion).perform()
+                    
+                    self.extrac_info(9)
+
                
+
+    def extrac_info(self,category)
+
+         #Recorremos la lista hasta 20 elementos
+         for objeto in range(2,20):
+
+            #Hacemos la extraccion de los datos
+            product-name = self.driver.find_element_by_xpath ('//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div['+str(objeto)+']/div/div/div/div/div[3]/div[1]/h2/a/span').text
+            price = self.driver.find_element_by_xpath ('//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div['+str(objeto)+']/div/div/div/div/div[3]/div[3]/div/span[2]').text
+
+            #Insertamos en la base de datos
+            count = self.cursor.execute("""INSERT INTO Trueketea.ProductPrice ( Categorie_Id, ProductName, Price) VALUES ("'"+ category + "','"+  +"','"+  +"')""""",'SQL Server Express New 20', 'SQLEXPRESS New 20', 0, 0, CURRENT_TIMESTAMP).rowcount
+            cnxn.commit()
+
+            if count == 0:
+                print('Error al insertar ')
 
 
 
